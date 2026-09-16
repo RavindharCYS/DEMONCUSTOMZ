@@ -1,0 +1,213 @@
+/* Horizontal, snap-scrolling reel strip — modelled on a mobile-style
+   reels rail: tall 9/16 tiles, a view-count pill top-left, and a caption
+   scrimmed in along the bottom.
+
+   The scroll viewport itself carries the page's max-width/gutter (instead
+   of nesting a separate centered .container inside a full-bleed scroller)
+   — nesting a centered box inside a wider scrollable one left a large
+   dead strip of empty scroll space to the left of the cards. */
+.reel-scroller {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 20px 24px 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--grey-400) transparent;
+}
+
+.reel-scroller::-webkit-scrollbar {
+  height: 8px;
+}
+
+.reel-scroller::-webkit-scrollbar-thumb {
+  background: var(--grey-400);
+  border-radius: var(--radius-pill);
+}
+
+.reel-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  padding: 2px 4px 2px 2px;
+}
+
+.reel-card {
+  position: relative;
+  flex: 0 0 190px;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--navy-900);
+  display: flex;
+  align-items: flex-end;
+  color: var(--grey-400);
+  font-size: 22px;
+  scroll-snap-align: start;
+  border: 1.5px solid transparent;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out), outline-color 0.3s var(--ease-out);
+}
+
+.reel-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(9, 13, 21, 0.35);
+  border-color: var(--lime-400);
+  outline: 1px solid color-mix(in srgb, var(--lime-400) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.reel-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-card__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(9, 13, 21, 0.88) 0%, rgba(9, 13, 21, 0.05) 42%, rgba(9, 13, 21, 0.25) 100%);
+}
+
+/* --- View-count pill, top-left --- */
+.reel-card__views {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(9, 13, 21, 0.55);
+  backdrop-filter: blur(3px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* --- Play badge, centred, appears on hover --- */
+.reel-card__play-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%) scale(0.85);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(3px);
+  color: #fff;
+  font-size: 17px;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.reel-card:hover .reel-card__play-badge {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* --- Caption, bottom --- */
+.reel-card__caption {
+  position: relative;
+  z-index: 2;
+  padding: 12px 12px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #fff;
+}
+
+/* --- Placeholder / "coming soon" tiles --- */
+.reel-card--placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+}
+
+.reel-card--tone1::before { background: linear-gradient(150deg, #405de6, #5851db 40%, #833ab4); }
+.reel-card--tone2::before { background: linear-gradient(150deg, #833ab4, #c13584 45%, #e1306c); }
+.reel-card--tone3::before { background: linear-gradient(150deg, #e1306c, #fd1d1d 45%, #f56040); }
+.reel-card--tone4::before { background: linear-gradient(150deg, #f56040, #f77737 50%, #fcaf45); }
+
+.reel-card--placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.22), transparent 55%),
+    linear-gradient(0deg, rgba(9, 13, 21, 0.75) 0%, transparent 55%);
+}
+
+.reel-card--placeholder .reel-card__caption,
+.reel-card--placeholder .reel-card__views {
+  opacity: 0.95;
+}
+
+/* --- Follow CTA tile --- */
+.reel-card--cta {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(155deg, var(--navy-800), var(--navy-900));
+  border: 1.5px dashed rgba(205, 234, 61, 0.35);
+  color: var(--text-inverse);
+  text-align: center;
+  padding: 12px;
+}
+
+.reel-card__cta-icon {
+  font-size: 30px;
+  color: var(--lime-400);
+}
+
+.reel-card__cta-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.reel-card__cta-handle {
+  font-size: 12px;
+  color: #9aa2b8;
+}
+
+/* --- Loading skeleton --- */
+.reel-card--skeleton {
+  background: linear-gradient(90deg, var(--navy-800) 0%, var(--navy-700) 50%, var(--navy-800) 100%);
+  background-size: 200% 100%;
+  animation: reel-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes reel-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.reel-note {
+  margin-top: 24px;
+  font-size: 13px;
+}
+
+.reel-note code {
+  background: var(--grey-200);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .reel-card { flex-basis: 150px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-card--skeleton { animation: none; }
+}

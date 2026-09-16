@@ -1,0 +1,101 @@
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.brand-card {
+  position: relative;
+  background: var(--surface-1);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 24px 16px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  aspect-ratio: 3 / 4;
+  justify-content: center;
+  gap: 16px;
+  box-shadow: 0 1px 2px rgba(19, 27, 46, 0.04);
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+}
+
+/* Soft radial tint in the brand's own colour, revealed on hover instead
+   of the old sliding top bar. */
+.brand-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120px 90px at 50% -10%, color-mix(in srgb, var(--brand-accent, var(--lime-400)) 22%, transparent), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+  pointer-events: none;
+}
+
+.brand-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--brand-accent, var(--navy-800));
+  outline: 1px solid color-mix(in srgb, var(--brand-accent, var(--navy-800)) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.brand-card:hover::before {
+  opacity: 1;
+}
+
+.brand-card__image-wrap {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.brand-card__image-wrap img {
+  max-width: 100%;
+  max-height: 82px;
+  object-fit: contain;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.brand-card:hover .brand-card__image-wrap img {
+  transform: scale(1.08);
+}
+
+.brand-card__badge {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--brand-accent, var(--navy-800));
+  box-shadow: 0 6px 16px rgba(19, 27, 46, 0.18);
+}
+
+.brand-card__name {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.brand-card__origin {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

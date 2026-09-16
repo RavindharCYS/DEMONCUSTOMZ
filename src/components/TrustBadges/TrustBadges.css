@@ -1,0 +1,120 @@
+.trust-strip {
+  padding: 64px 0 72px;
+}
+
+.trust-strip__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--navy-900);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+
+.trust-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 28px;
+  transition: background 0.3s var(--ease-out);
+}
+
+.trust-badge + .trust-badge {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trust-badge:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.trust-badge__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  background: var(--lime-400);
+  color: var(--navy-900);
+  font-size: 20px;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.trust-badge:hover .trust-badge__icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.trust-badge__body h3 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.trust-badge__body p {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .trust-strip {
+    padding: 48px 0 56px;
+  }
+
+  .trust-strip__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trust-badge {
+    border-left: none !important;
+  }
+
+  .trust-badge:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .trust-badge:nth-child(n+3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (max-width: 520px) {
+  .trust-strip {
+    padding: 36px 0 44px;
+  }
+
+  .trust-strip__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trust-badge {
+    padding: 22px 20px;
+    gap: 14px;
+    border-left: none !important;
+  }
+
+  .trust-badge + .trust-badge {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .trust-badge__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
+  }
+
+  .trust-badge__body h3 {
+    font-size: 14px;
+  }
+
+  .trust-badge__body p {
+    font-size: 12px;
+  }
+}

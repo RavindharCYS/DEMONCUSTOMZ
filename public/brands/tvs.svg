@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" role="img" aria-label="TVS Motor">
+  <title>TVS Motor</title>
+  <defs>
+    <linearGradient id="g-tvs" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#4f9c87"/>
+      <stop offset="100%" stop-color="#0d2e26"/>
+    </linearGradient>
+    <radialGradient id="sheen-tvs" cx="32%" cy="22%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- outer coin edge -->
+  <circle cx="70" cy="70" r="66" fill="none" stroke="#1f6f5c" stroke-opacity="0.28" stroke-width="1.5"/>
+  <circle cx="70" cy="70" r="66" fill="none" stroke="#1f6f5c" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="1 4.2"/>
+
+  <!-- main plate -->
+  <circle cx="70" cy="70" r="57" fill="url(#g-tvs)"/>
+  <circle cx="70" cy="70" r="57" fill="url(#sheen-tvs)"/>
+  <circle cx="70" cy="70" r="57" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+
+  <!-- top / bottom studs -->
+  <circle cx="70" cy="18" r="2.4" fill="#1f6f5c"/>
+  <circle cx="70" cy="122" r="2.4" fill="#1f6f5c" opacity="0.55"/>
+
+  <text x="70" y="65" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-style="italic" font-size="28" fill="#ffffff" letter-spacing="1">TVS</text>
+  <text x="70" y="94" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="8.5" fill="#ffffff" fill-opacity="0.8" letter-spacing="1.8">MOTOR COMPANY</text>
+
+  <path d="M 40 108 Q 70 116 100 108" fill="none" stroke="#1f6f5c" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+</svg>
